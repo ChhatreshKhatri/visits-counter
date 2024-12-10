@@ -1,0 +1,1 @@
+npm i react@latest react-dom@latest react-scripts@latest web-vitals@latest tailwindcss@latest

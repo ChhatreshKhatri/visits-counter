@@ -29,6 +29,10 @@ const MyForm = () => {
   const handleButtonLeave = () => {
     setIsButtonHovered(false);
   };
+  // useEffect(() => {
+  //   console.log("env var", process.env.REACT_APP_URL);
+  // }
+  // , []);
 
   useEffect(() => {
     console.log("Form state updated:", formState);
@@ -36,7 +40,7 @@ const MyForm = () => {
   }, [formState]);
 
   const generateCopyLink = (formData) => {
-    return `https://visits.chhatreshkhatri.com/${formData.uniqueID}?label=${formData.label}&LSHW=${formData.shadowLabelColor}&CSHW=${formData.shadowCountColor}&SHWO=${formData.opacity}&swap=${formData.swap}&LBGC=${formData.labelBGColor}&CBGC=${formData.countBGColor}&LTC=${formData.labelTextColor}&CTC=${formData.countTextColor}`;
+    return `${process.env.REACT_APP_URL}/${formData.uniqueID}?label=${formData.label}&LSHW=${formData.shadowLabelColor}&CSHW=${formData.shadowCountColor}&SHWO=${formData.opacity}&swap=${formData.swap}&LBGC=${formData.labelBGColor}&CBGC=${formData.countBGColor}&LTC=${formData.labelTextColor}&CTC=${formData.countTextColor}`;
   };
 
   const handleGenerateLink = () => {
@@ -57,7 +61,7 @@ const MyForm = () => {
   };
 
   const generateLink = (formData) => {
-    return `https://visits.chhatreshkhatri.com/${formData.uniqueID}?label=${formData.label}&LSHW=${formData.shadowLabelColor}&CSHW=${formData.shadowCountColor}&SHWO=${formData.opacity}&swap=${formData.swap}&LBGC=${formData.labelBGColor}&CBGC=${formData.countBGColor}&LTC=${formData.labelTextColor}&CTC=${formData.countTextColor}&PK=${formData.passKey}&SETC=${formData.setCount}`;
+    return `${process.env.REACT_APP_URL}/${formData.uniqueID}?label=${formData.label}&LSHW=${formData.shadowLabelColor}&CSHW=${formData.shadowCountColor}&SHWO=${formData.opacity}&swap=${formData.swap}&LBGC=${formData.labelBGColor}&CBGC=${formData.countBGColor}&LTC=${formData.labelTextColor}&CTC=${formData.countTextColor}&PK=${formData.passKey}&SETC=${formData.setCount}`;
   };
 
   const handleSubmit = (e) => {
@@ -94,7 +98,7 @@ const MyForm = () => {
               value={formState.uniqueID}
               className="shadow w-[150px] appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onChange={(e) => setFormState((prevState) => ({ ...prevState, uniqueID: e.target.value }))}
-              />
+            />
           </div>
           <div className="flex flex-col">
             <label className="text-gray-700 text-sm font-bold w-24" htmlFor={"label"}>
@@ -107,11 +111,11 @@ const MyForm = () => {
               value={formState.label}
               className="shadow w-[150px] appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onChange={(e) => setFormState((prevState) => ({ ...prevState, label: e.target.value }))}
-              />
+            />
           </div>
           <div className="flex flex-col">
             <label className="text-gray-700 text-sm font-bold w-24" htmlFor={"shadowLabelColor"}>
-            Shadow Label Color:
+              Shadow Label Color:
             </label>
             <input
               type="text"
@@ -124,7 +128,7 @@ const MyForm = () => {
           </div>
           <div className="flex flex-col">
             <label className="text-gray-700 text-sm font-bold w-24" htmlFor={"shadowCountColor"}>
-            Shadow Count Color:
+              Shadow Count Color:
             </label>
             <input
               type="text"
@@ -239,28 +243,19 @@ const MyForm = () => {
               onChange={(e) => setFormState((prevState) => ({ ...prevState, setCount: e.target.value }))}
             />
           </div>
-
         </form>
       </div>
       {/* Generate and Copy buttons */}
       <div className="w-full col-span-2 flex flex-col">
         <div className="flex items-center justify-center">
-          <button
-            type="button"
-            onClick={handleGenerateLink}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 focus:outline-none focus:shadow-outline whitespace-nowrap">
+          <button type="button" onClick={handleGenerateLink} className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2 focus:outline-none focus:shadow-outline whitespace-nowrap">
             Generate Link
           </button>
           {showGeneratedImage && <img src={generatedLink} alt="Generated link" className=" h-12 m-2" />}
         </div>
 
         <div className="flex flex-col items-center">
-          <button
-            type="button"
-            onClick={handleCopyLink}
-            className="bg-green-500 hover:bg-green-700 text-white font-bold p-2 rounded mt-2 focus:outline-none focus:shadow-outline"
-            onMouseEnter={handleButtonHover}
-            onMouseLeave={handleButtonLeave}>
+          <button type="button" onClick={handleCopyLink} className="bg-green-500 hover:bg-green-700 text-white font-bold p-2 rounded mt-2 focus:outline-none focus:shadow-outline" onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
             Copy Link
           </button>
           {isButtonHovered && <div className="text-sm text-gray-500 whitespace-nowrap">{copyLink}</div>}

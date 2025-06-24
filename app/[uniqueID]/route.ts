@@ -28,7 +28,6 @@ export async function GET(request: Request) {
     return new NextResponse(svgbadge, {
       headers: {
         "Content-Type": "image/svg+xml",
-        "Cache-Control": "public, max-age=3600, immutable",
       },
     });
   } catch (error) {

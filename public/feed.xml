@@ -1,0 +1,9 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Visits Counter</title>
+    <link>https://visits.chhatreshkhatri.com</link>
+    <description>A simple visits counter with a customizable badge</description>
+    <language>en</language>
+    <atom:link href="https://visits-counter.vercel.app/feed.xml" rel="self" type="application/rss+xml" />
+  </channel>
+  </rss> 

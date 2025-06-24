@@ -63,7 +63,7 @@ export default function Home() {
       CSHW: formState.shadowCountColor,
     }).toString();
     navigator.clipboard.writeText(`${baseUrl}?${query}`);
-    setPreviewQuery("");
+    setPreviewQuery(``);
     alert("Link copied to clipboard!");
   };
 
@@ -74,14 +74,14 @@ export default function Home() {
       {/* Live SVG Preview */}
       <div className="flex justify-center mb-4">
         <div
-          className="h-20"
+          className="h-16"
           dangerouslySetInnerHTML={{
             __html: SvgBadge(formState.label, formState.setCount, formState.swap === "1", parseInt(formState.opacity, 10), formState.shadowLabelColor, formState.shadowCountColor, formState.labelBGColor, formState.countBGColor, formState.labelTextColor, formState.countTextColor),
           }}
         />
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-wrap gap-x-6 gap-y-4 justify-center max-w-2xl mx-auto">
+      <form onSubmit={handleSubmit} className="flex flex-wrap gap-x-2 gap-y-6 justify-center max-w-xl mx-auto">
         {[
           { id: "uniqueID", label: "Unique ID" },
           { id: "passKey", label: "Pass Key" },
@@ -104,10 +104,10 @@ export default function Home() {
             {type === "color" ? (
               <div className="flex items-center gap-2 pr-2">
                 <input id={id} name={id} type="color" value={formState[id as keyof typeof formState]} onChange={handleChange} className="w-14 h-10 border rounded cursor-pointer" />
-                <span className="text-xs w-[72px] text-center">{formState[id as keyof typeof formState]}</span>
+                <input id={id} name={id} type="text" value={formState[id as keyof typeof formState]} onChange={handleChange} className="w-24 border rounded px-2 py-1 text-sm text-center" />
               </div>
             ) : (
-              <input id={id} name={id} type={type || "text"} value={formState[id as keyof typeof formState]} onChange={handleChange} className="border rounded px-2 py-1 text-sm" />
+              <input id={id} name={id} type={type || "text"} value={formState[id as keyof typeof formState]} onChange={handleChange} className="border rounded px-2 py-1 text-sm text-center" />
             )}
           </div>
         ))}
@@ -122,10 +122,11 @@ export default function Home() {
 
       {previewQuery && (
         <div className="flex flex-col items-center justify-center text-center mt-2">
-          <button onClick={copyLink} className="ml-4 bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition">
+          <p className="text-sm mt-2">Generated Badge:</p>
+          <Image unoptimized width={185} height={60} src={`${previewQuery}`} alt="Generated Badge" className="h-16 mt-4" />
+          <button onClick={copyLink} className="mt-4 bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition">
             Copy Link
           </button>
-          <Image unoptimized width={185} height={60} src={`${previewQuery}`} alt="Generated Badge" className="max-w-full h-auto mt-4" />
         </div>
       )}
     </div>

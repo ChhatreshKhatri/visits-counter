@@ -1,15 +1,9 @@
 "use client";
 import { useState } from "react";
-import { ChromePicker } from "react-color";
 import { SvgBadge } from "./components/SvgBadge";
 import Image from "next/image";
 
 export default function Home() {
-  const [activeColorPicker, setActiveColorPicker] = useState<string | null>(null);
-  const handleColorChange = (color: string, id: string) => {
-    setFormState((prev) => ({ ...prev, [id]: color }));
-  };
-
   const [formState, setFormState] = useState({
     uniqueID: "uniqueID",
     label: "Visits",
@@ -108,17 +102,9 @@ export default function Home() {
             </label>
 
             {type === "color" ? (
-              <div className="relative">
-                <div className="flex items-center gap-2">
-                  <div className="w-14 h-10 border rounded cursor-pointer" style={{ backgroundColor: formState[id as keyof typeof formState] }} onClick={() => setActiveColorPicker(activeColorPicker === id ? null : id)} />
-                  <input id={id} name={id} type="text" value={formState[id as keyof typeof formState]} onChange={handleChange} className="w-28 border rounded px-2 py-1 text-sm text-center" />
-                </div>
-                {activeColorPicker === id && (
-                  <div className="absolute z-10 mt-2">
-                    <div className="fixed inset-0" onClick={() => setActiveColorPicker(null)} />
-                    <ChromePicker color={formState[id as keyof typeof formState]} onChange={(color) => handleColorChange(color.hex, id)} />
-                  </div>
-                )}
+              <div className="flex items-center gap-2">
+                <input id={id} name={id} type="color" value={formState[id as keyof typeof formState]} onChange={handleChange} className="w-14 h-10 border rounded cursor-pointer" />
+                <input id={`${id}-text`} name={id} type="text" value={formState[id as keyof typeof formState]} onChange={handleChange} className="w-28 border rounded px-2 py-1 text-sm text-center" />
               </div>
             ) : (
               <input id={id} name={id} type={type || "text"} value={formState[id as keyof typeof formState]} onChange={handleChange} className="border rounded px-2 py-1 text-sm text-center" />

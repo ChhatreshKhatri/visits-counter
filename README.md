@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Visits Counter Badge Generator
 
-## Getting Started
+A Next.js application that generates customizable SVG badges for tracking visits to your projects or websites.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🎨 **Native Color Picker**: Uses HTML5 native color inputs for maximum compatibility and simplicity
+- 🎯 **Real-time Preview**: See your badge changes instantly as you customize
+- 🔧 **Highly Customizable**: Control colors, labels, shadows, and more
+- 📊 **Visit Tracking**: Automatic visit counting with MongoDB storage
+- 🔐 **Pass Key Protection**: Secure badge count modification
+- 📋 **Easy Integration**: Copy-paste ready URLs for embedding
+
+## Usage
+
+### 1. Badge Generator Interface
+
+Visit the main page to use the interactive badge generator:
+
+- Set your unique ID and pass key
+- Customize colors using native HTML5 color inputs
+- Preview your badge in real-time
+- Copy the generated URL for use
+
+### 2. Badge URL Parameters
+
+Your badge URL will look like:
+
+```
+https://yourdomain.com/your-unique-id?label=Visits&CBGC=1CA2F1&...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Available Parameters:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `label`: Badge label text (default: "Visits")
+- `PK`: Pass key for secure operations
+- `SETC`: Set specific count (requires correct pass key)
+- `LBGC`: Label background color (hex without #, default: "484848")
+- `CBGC`: Count background color (hex without #, default: "1CA2F1")
+- `LTC`: Label text color (hex without #, default: "ffffff")
+- `CTC`: Count text color (hex without #, default: "ffffff")
+- `LSHW`: Label shadow color (hex without #, default: "1")
+- `CSHW`: Count shadow color (hex without #, default: "1")
+- `SHWO`: Shadow opacity (0-100, default: "30")
+- `swap`: Swap label and count positions (0 or 1, default: "0")
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Embedding in README
 
-## Learn More
+```markdown
+![Visits](https://yourdomain.com/your-unique-id)
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. HTML Embedding
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```html
+<img src="https://yourdomain.com/your-unique-id" alt="Visits" />
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment Setup
 
-## Deploy on Vercel
+Make sure to set your MongoDB connection string. Copy `.env.example` to `.env` and update:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```env
+MONGODB_URI=your_mongodb_connection_string
+port=3000
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+Visit http://localhost:3000 to access the badge generator interface (or another port if 3000 is in use).
